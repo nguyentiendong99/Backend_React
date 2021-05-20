@@ -15,8 +15,8 @@ import java.util.Set;
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     @Column(name = "username")
     @NotNull
     @Size(max = 200)
@@ -47,4 +47,13 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles = new HashSet<>();
+    public User(){
+
+    }
+    public User(String username, String email, String password , String phoneNumber) {
+        this.userName = username;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+    }
 }

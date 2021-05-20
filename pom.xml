@@ -16,7 +16,6 @@
     <properties>
         <java.version>8</java.version>
         <mapstruct.version>1.4.1.Final</mapstruct.version>
-        <jwt.version>0.11.1</jwt.version>
     </properties>
     <dependencies>
         <dependency>
@@ -54,20 +53,8 @@
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-api</artifactId>
-            <version>${jwt.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-impl</artifactId>
-            <version>${jwt.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-jackson</artifactId>
-            <scope>runtime</scope>
-            <version>${jwt.version}</version>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
         </dependency>
         <dependency>
             <groupId>jakarta.servlet</groupId>

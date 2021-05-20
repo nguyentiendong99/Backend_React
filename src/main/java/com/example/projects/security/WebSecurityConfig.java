@@ -1,41 +1,45 @@
 package com.example.projects.security;
 
 import com.example.projects.security.jwt.JwtAuthenticationFilter;
+import com.example.projects.security.jwt.JwtEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     DomainUserDetailsService userDetailsService;
+
+    @Autowired
+    private JwtEntryPoint unauthorizedHandler;
+
     @Bean
-    public JwtAuthenticationFilter jwtAuthenticationFilter() {
+    public JwtAuthenticationFilter authenticationJwtTokenFilter() {
         return new JwtAuthenticationFilter();
     }
 
-    @Bean(BeanIds.AUTHENTICATION_MANAGER)
     @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        // Get AuthenticationManager bean
-        return super.authenticationManagerBean();
+    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+        authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Bean
-    public UserDetailsService userDetailsService() {
-        return new DomainUserDetailsService();
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
     @Bean
@@ -44,21 +48,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder());
-    }
-    @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .cors()
-                .and()
-                .csrf()
-                .disable()
-                .authorizeRequests()
-                .antMatchers("/api/v1/login").permitAll() // Cho phép tất cả mọi người truy cập vào 2 địa chỉ này
-                .anyRequest().authenticated(); // Tất cả các request khác đều cần phải xác thực mới được truy cập
+        http.cors().and().csrf().disable()
+                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .authorizeRequests().antMatchers("/api/v1/authenticate").permitAll()
+                .antMatchers("/api/v1/register").permitAll()
+                .antMatchers("/api/v1/users").permitAll()
+                .anyRequest().authenticated();
 
-        // Thêm một lớp Filter kiểm tra jwt
-        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);}
+        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+    }
 }
