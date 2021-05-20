@@ -12,10 +12,4 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
     @PersistenceContext
     EntityManager entityManager;
 
-    @Override
-    public List<User> getListUser() {
-        String sql = "SELECT u FROM User u";
-        Query query = entityManager.createQuery(sql , User.class);
-        return query.getResultList();
-    }
 }

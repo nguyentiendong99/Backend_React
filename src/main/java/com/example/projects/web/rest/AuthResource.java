@@ -125,6 +125,7 @@ public class AuthResource {
         user.setImage(registerRequest.getImage());
         user.setActivated(true);
         user.setRoles(roles);
+        user.setCreatedDate(new Date());
         userService.save(user);
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }

@@ -1,11 +1,12 @@
 package com.example.projects.service;
 
 import com.example.projects.domain.User;
+import com.example.projects.dto.UserDTO;
 
 import java.util.List;
 
 public interface UserService {
-    List<User> getListUser();
+    List<UserDTO> getListUser();
     User getUserByEmail(String email);
     Boolean existsByEmail(String email);
     Boolean existsByUserName(String username);

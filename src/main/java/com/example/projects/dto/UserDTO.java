@@ -1,12 +1,12 @@
 package com.example.projects.dto;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
 public class UserDTO {
     private int id;
     private String userName;
@@ -20,4 +20,5 @@ public class UserDTO {
     private Date dob;
     private int position_ID;
     private int department_ID;
+    private Date createdDate;
 }

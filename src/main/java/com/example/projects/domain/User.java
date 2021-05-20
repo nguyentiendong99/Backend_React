@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +14,8 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -39,7 +41,8 @@ public class User {
     private int positionID;
     @Column(name = "department_id")
     private int department_ID;
-
+    @Column(name = "created_date")
+    private Date createdDate;
     @ManyToMany(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_role" ,

@@ -15,16 +15,16 @@ import java.util.List;
 public class UserResource {
 
     private final UserService userService;
-    private final UserMapper userMapper;
+   // private final UserMapper userMapper;
 
-    public UserResource(UserService userService, UserMapper userMapper) {
+    public UserResource(UserService userService) {
         this.userService = userService;
-        this.userMapper = userMapper;
+        //this.userMapper = userMapper;
     }
 
     @GetMapping("/users")
     public ResponseEntity<List<UserDTO>> getListUser() {
-        List<UserDTO> listUser = userMapper.toDto(userService.getListUser());
-        return ResponseEntity.ok(listUser);
+        List<UserDTO> listUser = userService.getListUser();
+        return ResponseEntity.ok().body(listUser);
     }
 }
