@@ -7,21 +7,19 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface ProductMapper extends EntityMapper<ProductDTO, Product> {
-    Product toEntity(ProductDTO productDTO);
+    @Override
+    Product toEntity(ProductDTO dto);
 
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    Product toEntity(ProductDTO productDTO, @MappingTarget Product product);
+    @Override
+    ProductDTO toDto(Product entity);
 
-    ProductDTO toDto(Product product);
+    @Override
+    List<Product> toEntity(List<ProductDTO> dtoList);
 
-    default Product fromId(Integer id) {
-        if (id == null) {
-            return null;
-        }
-        Product product = new Product();
-        product.setId(id);
-        return product;
-    }
+    @Override
+    List<ProductDTO> toDto(List<Product> entityList);
 }

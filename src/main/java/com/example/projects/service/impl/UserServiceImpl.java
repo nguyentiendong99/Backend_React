@@ -5,10 +5,15 @@ import com.example.projects.dto.UserDTO;
 import com.example.projects.repository.UserRepository;
 import com.example.projects.service.UserService;
 import com.example.projects.service.mapper.UserMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.MultiValueMap;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -23,6 +28,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDTO> getListUser() {
         return userMapper.toDto(userRepository.findAll());
+    }
+
+    @Override
+    public UserDTO getUserById(Integer id) {
+        return userMapper.toDto(userRepository.findById(id).get());
     }
 
     @Override
@@ -49,4 +59,37 @@ public class UserServiceImpl implements UserService {
     public User save(User user){
         return userRepository.save(user);
     }
+
+    @Override
+    public Page<UserDTO> search(MultiValueMap<String, String> queryParams, Pageable pageable) {
+        List<UserDTO> userDTOList = userMapper.toDto(userRepository.search(queryParams, pageable));
+        return new PageImpl<>(userDTOList, pageable, userRepository.count(queryParams));
+    }
+
+    @Override
+    public Optional<User> findOne(Integer id) {
+        return userRepository.findById(id);
+    }
+
+    @Override
+    public UserDTO update(UserDTO userDTO) {
+        User user = userRepository.findById(userDTO.getId()).get();
+        user.setUserName(userDTO.getUserName());
+        user.setPassword(userDTO.getPassword());
+        user.setEmail(userDTO.getEmail());
+        user.setAddress(userDTO.getAddress());
+        user.setImage(userDTO.getImage());
+        user.setPhoneNumber(userDTO.getPhone());
+        user = userRepository.save(user);
+        return userMapper.toDto(user);
+    }
+
+    private User setPropertyOfUser(User user , UserDTO userDTO){
+        user.setUserName(userDTO.getUserName());
+        user.setPhoneNumber(userDTO.getPhone());
+        user.setEmail(userDTO.getEmail());
+        user.setPassword(userDTO.getPassword());
+        return user;
+    }
+
 }
