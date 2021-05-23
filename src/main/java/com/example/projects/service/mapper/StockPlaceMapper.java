@@ -8,15 +8,11 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface StockPlaceMapper extends EntityMapper<StockPlaceDTO , StockPlace> {
-    @Override
     StockPlace toEntity(StockPlaceDTO dto);
 
-    @Override
     StockPlaceDTO toDto(StockPlace entity);
 
-    @Override
     List<StockPlace> toEntity(List<StockPlaceDTO> dtoList);
 
-    @Override
     List<StockPlaceDTO> toDto(List<StockPlace> entityList);
 }

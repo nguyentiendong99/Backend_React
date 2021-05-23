@@ -14,5 +14,5 @@ public class BrandDTO {
     private String name;
     private String description;
     List<Category> categories;
-    Agents agents;
+   // Agents agents;
 }

@@ -12,7 +12,7 @@ import java.util.List;
 public class StockPlaceDTO {
     private Integer id;
     private String stockPlace;
-    List<Stock> stocks;
-    Company company;
+//    List<Stock> stocks;
+//    Company company;
 
 }

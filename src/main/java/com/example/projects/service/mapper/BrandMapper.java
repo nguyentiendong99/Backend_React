@@ -8,15 +8,11 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface BrandMapper extends EntityMapper<BrandDTO , Brand> {
-    @Override
     Brand toEntity(BrandDTO dto);
 
-    @Override
     BrandDTO toDto(Brand entity);
 
-    @Override
     List<Brand> toEntity(List<BrandDTO> dtoList);
 
-    @Override
     List<BrandDTO> toDto(List<Brand> entityList);
 }

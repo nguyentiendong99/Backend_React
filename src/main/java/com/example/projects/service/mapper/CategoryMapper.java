@@ -7,16 +7,12 @@ import org.mapstruct.Mapper;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface CategoryMapper extends EntityMapper<CategoryDTO , Category> {
-    @Override
+public interface CategoryMapper extends EntityMapper<CategoryDTO , Category >{
     Category toEntity(CategoryDTO dto);
 
-    @Override
     CategoryDTO toDto(Category entity);
 
-    @Override
     List<Category> toEntity(List<CategoryDTO> dtoList);
 
-    @Override
     List<CategoryDTO> toDto(List<Category> entityList);
 }

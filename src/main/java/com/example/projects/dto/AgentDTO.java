@@ -16,6 +16,6 @@ public class AgentDTO {
     private Date purchaseDate;
     private Double totalPrice;
     private Long quantity;
-    List<Brand> brands;
-    Stock stock;
+//    List<Brand> brands;
+//    Stock stock;
 }

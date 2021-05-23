@@ -21,7 +21,7 @@ public class StockDTO {
     private String importBy;
     private String exportBy;
     private double totalPrice;
-    List<Agents> agents;
-    StockPlace stockPlace;
+//    List<Agents> agents;
+//    StockPlace stockPlace;
 
 }
