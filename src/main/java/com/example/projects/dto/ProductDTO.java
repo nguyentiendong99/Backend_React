@@ -1,9 +1,13 @@
 package com.example.projects.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Date;
 
 public class ProductDTO {
     private Integer id;
+    private Integer categoryId ;
     private String name;
     private Double price;
     private String color;
@@ -19,6 +23,14 @@ public class ProductDTO {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getName() {

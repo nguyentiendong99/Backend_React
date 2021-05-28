@@ -9,12 +9,14 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "stock")
+@Table(name = "stocks")
 public class Stock implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name = "stock_place_id")
+    private Integer stockPlaceId;
     private String name;
     private String address;
     private Long capacity;
@@ -30,11 +32,10 @@ public class Stock implements Serializable {
     private String exportBy;
     @Column(name = "total_price")
     private double totalPrice;
-
-    @OneToMany(mappedBy = "stock")
-    List<Agents> agents;
-
-    @ManyToOne
-    @JoinColumn(name = "stock_place_id")
-    StockPlace stockPlace;
+//    @OneToMany(mappedBy = "stock")
+//    List<Agents> agents;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "stock_place_id")
+//    StockPlace stockPlace;
 }

@@ -1,5 +1,6 @@
 package com.example.projects.service.impl;
 
+import com.example.projects.domain.Category;
 import com.example.projects.dto.CategoryDTO;
 import com.example.projects.repository.CategoryRepository;
 import com.example.projects.service.CategoryService;
@@ -21,7 +22,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryDTO> getListCategory() {
-        return categoryMapper.toDto(categoryRepository.findAll());
+    public List<Category> getListCategory() {
+        return categoryRepository.getListCategory();
     }
 }

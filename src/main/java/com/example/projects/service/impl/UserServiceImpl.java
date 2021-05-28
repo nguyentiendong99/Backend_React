@@ -2,6 +2,7 @@ package com.example.projects.service.impl;
 
 import com.example.projects.domain.User;
 import com.example.projects.dto.UserDTO;
+import com.example.projects.exceptions.ResourceNotFoundException;
 import com.example.projects.repository.UserRepository;
 import com.example.projects.service.UserService;
 import com.example.projects.service.mapper.UserMapper;
@@ -26,8 +27,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDTO> getListUser() {
-        return userMapper.toDto(userRepository.findAll());
+    public void delete(Integer id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("user not found"));
+        userRepository.deleteById(id);
+    }
+
+    @Override
+    public List<User> getListUser() {
+        return userRepository.getListUser();
     }
 
     @Override

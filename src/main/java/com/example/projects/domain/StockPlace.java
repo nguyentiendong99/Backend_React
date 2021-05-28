@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 @Data
 @Entity
@@ -14,13 +13,15 @@ public class StockPlace implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name = "company_id")
+    private Integer companyId;
     @Column(name = "stock_place")
     private String stockPlace;
 
-    @OneToMany(mappedBy = "stockPlace")
-    List<Stock> stocks;
-
-    @ManyToOne
-    @JoinColumn(name = "company_id")
-    Company company;
+//    @OneToMany(mappedBy = "stockPlace")
+//    List<Stock> stocks;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "company_id")
+//    Company company;
 }

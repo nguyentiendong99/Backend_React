@@ -9,4 +9,5 @@ import java.util.List;
 public interface UserRepositoryCustom {
     List<User> search(MultiValueMap<String , String> queryParams , Pageable pageable);
     Long count(MultiValueMap<String, String> queryParams);
+    List<User> getListUser();
 }

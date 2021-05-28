@@ -15,6 +15,8 @@ public class Agents implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name = "stock_id")
+    private Integer stockId;
     private String name;
     private String address;
     private String email;
@@ -26,10 +28,10 @@ public class Agents implements Serializable {
     private Double totalPrice;
     private Long quantity;
 
-    @OneToMany(mappedBy = "agents")
-    List<Brand> brands;
-
-    @ManyToOne
-    @JoinColumn(name = "stock_id")
-    Stock stock;
+//    @OneToMany(mappedBy = "agents")
+//    List<Brand> brands;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "stock_id")
+//    Stock stock;
 }

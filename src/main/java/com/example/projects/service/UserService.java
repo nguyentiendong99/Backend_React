@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    List<UserDTO> getListUser();
+    void delete(Integer id);
+    List<User> getListUser();
     UserDTO getUserById(Integer id);
     User getUserByEmail(String email);
     Boolean existsByEmail(String email);

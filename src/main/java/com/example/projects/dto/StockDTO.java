@@ -8,10 +8,12 @@ import lombok.Setter;
 import java.util.Date;
 import java.util.List;
 
-@Getter
+
 @Setter
+@Getter
 public class StockDTO {
     private Integer id;
+    private Integer stockPlaceId;
     private String name;
     private String address;
     private Long capacity;
@@ -21,7 +23,6 @@ public class StockDTO {
     private String importBy;
     private String exportBy;
     private double totalPrice;
-//    List<Agents> agents;
-//    StockPlace stockPlace;
-
+//    private List<Agents> agents;
+//    private StockPlace stockPlace;
 }

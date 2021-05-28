@@ -14,13 +14,15 @@ public class Brand implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name = "agent_id")
+    private Integer agentId;
     private String name;
     private String description;
 
-    @OneToMany(mappedBy = "brand")
-    List<Category> categories;
-
-    @ManyToOne
-    @JoinColumn(name = "agent_id")
-    Agents agents;
+//    @OneToMany(mappedBy = "brand")
+//    List<Category> categories;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "agent_id")
+//    Agents agents;
 }

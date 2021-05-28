@@ -1,5 +1,6 @@
 package com.example.projects.service.impl;
 
+import com.example.projects.domain.Agents;
 import com.example.projects.dto.AgentDTO;
 import com.example.projects.repository.AgentRepository;
 import com.example.projects.service.AgentService;
@@ -21,7 +22,7 @@ public class AgentServiceImpl implements AgentService {
     }
 
     @Override
-    public List<AgentDTO> getListAgent() {
-        return agentMapper.toDto(agentRepository.findAll());
+    public List<Agents> getListAgent() {
+        return agentRepository.getListAgents();
     }
 }

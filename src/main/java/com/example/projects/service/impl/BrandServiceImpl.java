@@ -1,5 +1,6 @@
 package com.example.projects.service.impl;
 
+import com.example.projects.domain.Brand;
 import com.example.projects.dto.BrandDTO;
 import com.example.projects.repository.BrandRepository;
 import com.example.projects.service.BrandService;
@@ -21,7 +22,7 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public List<BrandDTO> getListBrand() {
-        return brandMapper.toDto(brandRepository.findAll());
+    public List<Brand> getListBrand() {
+        return brandRepository.getListBrand();
     }
 }

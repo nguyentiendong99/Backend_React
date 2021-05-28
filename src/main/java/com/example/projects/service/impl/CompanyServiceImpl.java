@@ -1,5 +1,6 @@
 package com.example.projects.service.impl;
 
+import com.example.projects.domain.Company;
 import com.example.projects.dto.CompanyDTO;
 import com.example.projects.repository.CompanyRepository;
 import com.example.projects.service.CompanyService;
@@ -21,7 +22,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public List<CompanyDTO> getCompany() {
-        return companyMapper.toDto(companyRepository.findAll());
+    public List<Company> getCompany() {
+        return companyRepository.getListCompany();
     }
 }

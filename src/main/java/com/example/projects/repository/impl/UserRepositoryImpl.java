@@ -47,6 +47,13 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
 
     }
 
+    @Override
+    public List<User> getListUser() {
+        String sql = "select u from User u";
+        Query query = entityManager.createQuery(sql , User.class);
+        return query.getResultList();
+    }
+
     private String createWhereQuery(MultiValueMap<String, String> queryParams, Map<String, Object> values) {
         StringBuilder sql = new StringBuilder();
         sql.append(" WHERE 1 = 1 ");

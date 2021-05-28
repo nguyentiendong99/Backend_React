@@ -1,6 +1,6 @@
 package com.example.projects.service.impl;
 
-import com.example.projects.dto.StockPlaceDTO;
+import com.example.projects.domain.StockPlace;
 import com.example.projects.repository.StockPlaceRepository;
 import com.example.projects.service.StockPlaceService;
 import com.example.projects.service.mapper.StockPlaceMapper;
@@ -21,7 +21,7 @@ public class StockPlaceServiceImpl implements StockPlaceService {
     }
 
     @Override
-    public List<StockPlaceDTO> getListStockPlace() {
-        return stockPlaceMapper.toDto(stockPlaceRepository.findAll());
+    public List<StockPlace> getListStockPlace() {
+        return stockPlaceRepository.getListStockPlace();
     }
 }

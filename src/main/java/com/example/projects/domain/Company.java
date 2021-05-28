@@ -22,6 +22,6 @@ public class Company implements Serializable {
     private String manager;
     private Date created_date;
 
-    @OneToMany(mappedBy = "company" )
-    List<StockPlace> places;
+//    @OneToMany(mappedBy = "company" )
+//    List<StockPlace> places;
 }

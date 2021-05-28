@@ -6,7 +6,11 @@ import com.example.projects.exceptions.ResourceNotFoundException;
 import com.example.projects.repository.ProductRepository;
 import com.example.projects.service.ProductService;
 import com.example.projects.service.mapper.ProductMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.MultiValueMap;
 
 import javax.transaction.Transactional;
 import java.util.Date;
@@ -24,13 +28,21 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDTO> getListProduct() {
-        return productMapper.toDto(productRepository.findAll());
+    public void delete(Integer id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Not found product"));
+        productRepository.deleteById(id);
+    }
+
+    @Override
+    public Page<Product> getListProduct(Pageable pageable) {
+        return productRepository.findAll(pageable);
     }
     @Override
     public ProductDTO Update(ProductDTO productDTO) {
         Product product = productRepository.findById(productDTO.getId()).get();
         product.setName(productDTO.getName());
+        product.setCategoryId(productDTO.getCategoryId());
         product.setColor(productDTO.getColor());
         product.setPrice(productDTO.getPrice());
         product.setBuy_by(productDTO.getBuy_by());
@@ -40,6 +52,11 @@ public class ProductServiceImpl implements ProductService {
         product = productRepository.save(product);
         return productMapper.toDto(product);
     }
+
+//    @Override
+//    public Product Save(Product product) {
+//        return productRepository.save(product);
+//    }
 
     @Override
     public ProductDTO Save(ProductDTO productDTO) {
@@ -51,6 +68,7 @@ public class ProductServiceImpl implements ProductService {
         product.setModified_date(productDTO.getModified_date());
         product.setQuantity(productDTO.getQuantity());
         product.setBuy_date(productDTO.getBuy_date());
+        product.setCategoryId(productDTO.getCategoryId());
         product.setCreated_date(new Date());
         product = productRepository.save(product);
         return productMapper.toDto(product);
@@ -66,5 +84,11 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found with id " + id));
         return productMapper.toDto(product);
+    }
+
+    @Override
+    public Page<ProductDTO> search(MultiValueMap<String, String> queryParams, Pageable pageable) {
+        List<ProductDTO> productDTOList = productMapper.toDto(productRepository.search(queryParams, pageable));
+        return new PageImpl<>(productDTOList, pageable, productRepository.count(queryParams));
     }
 }

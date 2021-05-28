@@ -2,6 +2,7 @@ package com.example.projects.web.rest;
 
 import com.example.projects.dto.StockDTO;
 import com.example.projects.service.StockService;
+import com.example.projects.service.mapper.StockMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,13 +14,14 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class StockResource {
     private final StockService service;
-
-    public StockResource(StockService service) {
+    private final StockMapper stockMapper;
+    public StockResource(StockService service, StockMapper stockMapper) {
         this.service = service;
+        this.stockMapper = stockMapper;
     }
-    @GetMapping("/stock")
+    @GetMapping("/stocks")
     public ResponseEntity<List<StockDTO>> getListStock(){
-        List<StockDTO> list = service.getListStock();
-        return ResponseEntity.ok().body(list);
+        List<StockDTO> list = stockMapper.toDto(service.getListStock());
+        return ResponseEntity.ok(list);
     }
 }
