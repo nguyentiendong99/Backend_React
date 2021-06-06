@@ -12,13 +12,13 @@ public class UserDTO {
     private String userName;
     private String password;
     private String email;
-    private String phone;
+    private String phoneNumber;
     private String address;
     private String image;
     private boolean activated;
     private int status;
     private Date dob;
-    private int position_ID;
+    private int positionID;
     private int department_ID;
     private Date createdDate;
 }

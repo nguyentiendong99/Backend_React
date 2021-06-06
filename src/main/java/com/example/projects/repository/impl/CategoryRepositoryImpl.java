@@ -12,10 +12,10 @@ public class CategoryRepositoryImpl implements CategoryRepositoryCustom {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Override
-    public List<Category> getListCategory() {
-        String sql = "select c from Category c";
-        Query query = entityManager.createQuery(sql , Category.class);
-        return query.getResultList();
-    }
+//    @Override
+//    public List<Category> getListCategory() {
+//        String sql = "select c from Category c";
+//        Query query = entityManager.createQuery(sql , Category.class);
+//        return query.getResultList();
+//    }
 }

@@ -9,13 +9,13 @@ import javax.persistence.Query;
 import java.util.List;
 
 public class BrandRepositoryImpl implements BrandRepositoryCustom {
-    @PersistenceContext
-    private EntityManager entityManager;
+//    @PersistenceContext
+//    private EntityManager entityManager;
 
-    @Override
-    public List<Brand> getListBrand() {
-        String sql = "select b from Brand b";
-        Query query = entityManager.createQuery(sql , Brand.class);
-        return query.getResultList();
-    }
+//    @Override
+//    public List<Brand> getListBrand() {
+//        String sql = "select b from Brand b";
+//        Query query = entityManager.createQuery(sql , Brand.class);
+//        return query.getResultList();
+//    }
 }

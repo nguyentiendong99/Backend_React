@@ -4,6 +4,8 @@ import com.example.projects.domain.StockPlace;
 import com.example.projects.repository.StockPlaceRepository;
 import com.example.projects.service.StockPlaceService;
 import com.example.projects.service.mapper.StockPlaceMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,7 +23,12 @@ public class StockPlaceServiceImpl implements StockPlaceService {
     }
 
     @Override
-    public List<StockPlace> getListStockPlace() {
-        return stockPlaceRepository.getListStockPlace();
+    public Page<StockPlace> getListStockPlace(Pageable pageable) {
+        return stockPlaceRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<StockPlace> getListStockPlaceByCompanyID(Integer id , Pageable pageable) {
+        return stockPlaceRepository.findByCompanyId(id , pageable);
     }
 }

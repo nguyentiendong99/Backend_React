@@ -87,17 +87,8 @@ public class UserServiceImpl implements UserService {
         user.setEmail(userDTO.getEmail());
         user.setAddress(userDTO.getAddress());
         user.setImage(userDTO.getImage());
-        user.setPhoneNumber(userDTO.getPhone());
+        user.setPhoneNumber(userDTO.getPhoneNumber());
         user = userRepository.save(user);
         return userMapper.toDto(user);
     }
-
-    private User setPropertyOfUser(User user , UserDTO userDTO){
-        user.setUserName(userDTO.getUserName());
-        user.setPhoneNumber(userDTO.getPhone());
-        user.setEmail(userDTO.getEmail());
-        user.setPassword(userDTO.getPassword());
-        return user;
-    }
-
 }

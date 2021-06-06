@@ -9,12 +9,12 @@ import javax.persistence.Query;
 import java.util.List;
 
 public class AgentRepositoryImpl implements AgentRepositoryCustom {
-    @PersistenceContext
-    private EntityManager entityManager;
-    @Override
-    public List<Agents> getListAgents() {
-        String sql = "select a from Agents a";
-        Query query = entityManager.createQuery(sql , Agents.class);
-        return query.getResultList();
-    }
+//    @PersistenceContext
+//    private EntityManager entityManager;
+//    @Override
+//    public List<Agents> getListAgents() {
+//        String sql = "select a from Agents a";
+//        Query query = entityManager.createQuery(sql , Agents.class);
+//        return query.getResultList();
+//    }
 }

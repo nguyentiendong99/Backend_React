@@ -5,6 +5,8 @@ import com.example.projects.dto.BrandDTO;
 import com.example.projects.repository.BrandRepository;
 import com.example.projects.service.BrandService;
 import com.example.projects.service.mapper.BrandMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -22,7 +24,12 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public List<Brand> getListBrand() {
-        return brandRepository.getListBrand();
+    public Page<Brand> getListBrand(Pageable pageable) {
+        return brandRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Brand> getListBrandByAgentId(Integer id , Pageable pageable) {
+        return brandRepository.findByAgentId(id , pageable);
     }
 }

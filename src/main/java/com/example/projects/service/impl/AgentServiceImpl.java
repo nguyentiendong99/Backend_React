@@ -5,6 +5,8 @@ import com.example.projects.dto.AgentDTO;
 import com.example.projects.repository.AgentRepository;
 import com.example.projects.service.AgentService;
 import com.example.projects.service.mapper.AgentMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -22,7 +24,12 @@ public class AgentServiceImpl implements AgentService {
     }
 
     @Override
-    public List<Agents> getListAgent() {
-        return agentRepository.getListAgents();
+    public Page<Agents> getListAgent(Pageable pageable) {
+        return agentRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Agents> getListAgentByStockId(Integer id , Pageable pageable) {
+        return agentRepository.findByStockId(id , pageable);
     }
 }

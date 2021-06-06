@@ -38,6 +38,17 @@ public class ProductServiceImpl implements ProductService {
     public Page<Product> getListProduct(Pageable pageable) {
         return productRepository.findAll(pageable);
     }
+
+    @Override
+    public List<Product> findAll() {
+        return (List<Product>) productRepository.findAll();
+    }
+
+    @Override
+    public Page<Product> getListProductByCategoryID(Integer id , Pageable pageable) {
+        return productRepository.findByCategoryId(id , pageable);
+    }
+
     @Override
     public ProductDTO Update(ProductDTO productDTO) {
         Product product = productRepository.findById(productDTO.getId()).get();

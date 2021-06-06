@@ -5,5 +5,5 @@ import com.example.projects.domain.Brand;
 import java.util.List;
 
 public interface BrandRepositoryCustom {
-    List<Brand> getListBrand();
+   // List<Brand> getListBrand();
 }

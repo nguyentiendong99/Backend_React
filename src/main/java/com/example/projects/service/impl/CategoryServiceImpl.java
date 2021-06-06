@@ -5,6 +5,8 @@ import com.example.projects.dto.CategoryDTO;
 import com.example.projects.repository.CategoryRepository;
 import com.example.projects.service.CategoryService;
 import com.example.projects.service.mapper.CategoryMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -22,7 +24,12 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Category> getListCategory() {
-        return categoryRepository.getListCategory();
+    public Page<Category> getListCategory(Pageable pageable) {
+        return categoryRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Category> getListCategoryByBrandId(Integer id , Pageable pageable) {
+        return categoryRepository.findByBrandId(id , pageable);
     }
 }

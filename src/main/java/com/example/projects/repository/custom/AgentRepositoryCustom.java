@@ -5,5 +5,5 @@ import com.example.projects.domain.Agents;
 import java.util.List;
 
 public interface AgentRepositoryCustom {
-    List<Agents> getListAgents();
+    //List<Agents> getListAgents();
 }
