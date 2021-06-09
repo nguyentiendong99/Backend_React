@@ -91,6 +91,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Product getByID(Integer id) {
+        return productRepository.findById(id).get();
+    }
+
+
+    @Override
     public ProductDTO findById(Integer id) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found with id " + id));

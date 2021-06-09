@@ -16,6 +16,7 @@ public interface ProductService {
     ProductDTO Update(ProductDTO productDTO);
     ProductDTO Save(ProductDTO product);
     ProductDTO getProductById(Integer id);
+    Product getByID(Integer id);
     ProductDTO findById(Integer id);
     Page<ProductDTO> search(MultiValueMap<String, String> queryParams , Pageable pageable);
 }
